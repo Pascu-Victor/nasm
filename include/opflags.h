@@ -12,6 +12,15 @@
 #include "tables.h"
 #include "regs.h"
 
+/* WOS signal.h exposes ucontext register indices under these names. NASM
+ * uses operand flags instead and does not consume those context indices. */
+#if defined(__WOS__)
+# undef REG_RAX
+# undef REG_RCX
+# undef REG_RDX
+# undef REG_RBX
+#endif
+
 /*
  * Here we define the operand types. These are implemented as bit
  * masks, since some are subsets of others; e.g. AX in a MOV
